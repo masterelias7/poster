@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DevOps Lifecycle Diagram</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #000000;
+    }
+    h1 {
+        margin-top: 20px;
+    }
+    canvas {
+        margin-top: 20px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<h1>DevOps Lifecycle</h1>
+<canvas id="devopsCanvas" width="800" height="400"></canvas>
+
+<script>
+const canvas = document.getElementById("devopsCanvas");
+const ctx = canvas.getContext("2d");
+
+// Stages of DevOps
+const stages = [
+    "Plan", "Code", "Build", "Test", "Release", "Deploy", "Operate", "Monitor"
+];
+
+// Coordinates for each stage in infinity loop shape
+const coords = [
+    {x: 200, y: 150}, // Plan
+    {x: 300, y: 80},  // Code
+    {x: 400, y: 150}, // Build
+    {x: 500, y: 80},  // Test
+    {x: 600, y: 150}, // Release
+    {x: 500, y: 250}, // Deploy
+    {x: 400, y: 330}, // Operate
+    {x: 300, y: 250}  // Monitor
+];
+
+// Draw infinity loop connecting points
+ctx.strokeStyle = "#333";
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(coords[0].x, coords[0].y);
+for (let i = 1; i < coords.length; i++) {
+    ctx.lineTo(coords[i].x, coords[i].y);
+}
+ctx.closePath();
+ctx.stroke();
+
+// Draw circles & labels
+ctx.font = "14px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+for (let i = 0; i < stages.length; i++) {
+    const {x, y} = coords[i];
+    // Circle
+    ctx.beginPath();
+    ctx.arc(x, y, 30, 0, Math.PI * 2);
+    ctx.fillStyle = "#4CAF50";
+    ctx.fill();
+    ctx.strokeStyle = "#222";
+    ctx.stroke();
+
+    // Label
+    ctx.fillStyle = "white";
+    ctx.fillText(stages[i], x, y);
+}
+</script>
+
+</body>
+</html>
+
